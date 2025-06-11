@@ -6,6 +6,8 @@
 // @author       You
 // @match        *://*.firefox.fun/user/index.aspx
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=firefox.fun
+// @updateURL    https://raw.githubusercontent.com/yinqiao0905/user-script/refs/heads/main/firefox.js
+// @downloadURL  https://raw.githubusercontent.com/yinqiao0905/user-script/refs/heads/main/firefox.js
 // @grant        none
 // ==/UserScript==
 
