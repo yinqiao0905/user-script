@@ -98,8 +98,15 @@
             }
         })
     }
-    setInterval(()=>{
-        autoAddReginCode()
-        addStyle()
-    },1e3)
+    const autoOpen = () =>{
+        $("#layui-layer1 > span.layui-layer-setwin a").click()
+        $("body > div.lyear-layout-web > div > aside > div > nav > ul > li:nth-child(6) > ul > li > a").click()
+     }
+     setInterval(()=>{
+         autoAddReginCode()
+         addStyle()
+     },500)
+     setTimeout(()=>{
+         autoOpen()
+     },1500)
 })();
