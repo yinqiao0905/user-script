@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox 
 // @namespace    http://tampermonkey.net/
-// @version      06-26
+// @version      07-01
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
@@ -102,10 +102,19 @@
         $("#layui-layer1 > span.layui-layer-setwin a").click()
         $("body > div.lyear-layout-web > div > aside > div > nav > ul > li:nth-child(6) > ul > li > a").click()
      }
+
+     const autoCloseDialog = () =>{
+        const currentIframe = document.querySelector("iframe.active")?.contentDocument
+        if (!currentIframe) return
+        const close = currentIframe.querySelector(".layui-layer-dialog > span.layui-layer-setwin > a")
+        if (!close) return
+        close.click()
+     }
      setInterval(()=>{
          autoAddReginCode()
          addStyle()
-     },500)
+         autoCloseDialog()
+     },200)
      setTimeout(()=>{
          autoOpen()
      },1500)
