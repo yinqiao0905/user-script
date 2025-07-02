@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox
 // @namespace    http://tampermonkey.net/
-// @version      07-01
+// @version      07.02
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
