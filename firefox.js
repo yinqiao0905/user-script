@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         firefox 
+// @name         firefox
 // @namespace    http://tampermonkey.net/
 // @version      07-01
 // @description  firefox
@@ -37,9 +37,9 @@
             const styleTag = iframeDocument.createElement('style');
             styleTag.id = "firefox-style"
             styleTag.textContent = userStyle;
-            iframeDocument.head.appendChild(styleTag);  
+            iframeDocument.head.appendChild(styleTag);
         }
-        
+
     }
     function autoAddReginCode(){
         const ad = document.querySelector("#adContainer")
@@ -107,7 +107,9 @@
         const currentIframe = document.querySelector("iframe.active")?.contentDocument
         if (!currentIframe) return
         const close = currentIframe.querySelector(".layui-layer-dialog > span.layui-layer-setwin > a")
+        const buttonText = currentIframe.querySelector(".layui-layer-dialog .layui-layer-btn")?.innerText
         if (!close) return
+        if (buttonText.includes("取消")) return
         close.click()
      }
      setInterval(()=>{
