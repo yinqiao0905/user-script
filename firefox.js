@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox
 // @namespace    http://tampermonkey.net/
-// @version      07.02.02
+// @version      07.02.03
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
@@ -109,7 +109,7 @@
         const close = currentIframe.querySelector(".layui-layer-dialog > span.layui-layer-setwin > a")
         const buttonText = currentIframe.querySelector(".layui-layer-dialog .layui-layer-btn")?.innerText
         if (!close) return
-        if (buttonText.includes("取消")) return
+        if (buttonText.includes("取消") || buttonText.toLowerCase().includes("no")) return
         close.click()
      }
      const setPageSize = () =>{
