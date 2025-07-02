@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox
 // @namespace    http://tampermonkey.net/
-// @version      07.02
+// @version      07.02.02
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
@@ -112,10 +112,18 @@
         if (buttonText.includes("取消")) return
         close.click()
      }
+     const setPageSize = () =>{
+        const currentIframe = document.querySelector("iframe.active")?.contentDocument
+        const pageSizeSelect =  currentIframe.querySelector("#selPageSize")
+        if (pageSizeSelect) {
+            pageSizeSelect.value = '100'
+        }
+     }
      setInterval(()=>{
          autoAddReginCode()
          addStyle()
          autoCloseDialog()
+         setPageSize()
      },200)
      setTimeout(()=>{
          autoOpen()
