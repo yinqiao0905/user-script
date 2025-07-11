@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox
 // @namespace    http://tampermonkey.net/
-// @version      07.11.01
+// @version      07.11.02
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
@@ -150,6 +150,8 @@
             {text:"印尼",value:"idn",code: 62},
             {text:"菲律宾",value:"phl",code: 63},
             {text:"越南",value:"vnm",code: 84},
+            {text:"香港",value:"hkg",code: 852},
+            {text:"澳门",value:"mac",code: 853},
         ]
         newButtons.forEach(button=>{
             const div = document.createElement("div")
