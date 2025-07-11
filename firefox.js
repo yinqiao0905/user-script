@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         firefox
 // @namespace    http://tampermonkey.net/
-// @version      07.02.03
+// @version      07.11.01
 // @description  firefox
 // @author       qqm
 // @match        *://*.firefox.fun/user/index.aspx
@@ -37,7 +37,11 @@
             const styleTag = iframeDocument.createElement('style');
             styleTag.id = "firefox-style"
             styleTag.textContent = userStyle;
-            iframeDocument.head.appendChild(styleTag);
+            try {
+                iframeDocument.head.appendChild(styleTag);
+            } catch (error) {
+                console.log(error)
+            }
         }
 
     }
@@ -119,11 +123,55 @@
             pageSizeSelect.value = '100'
         }
      }
+
+     const quickSetCountry = (value,text) =>{
+        const iframeDocument = document.querySelector("iframe[src='business/gets.aspx']")?.contentDocument
+        if(!iframeDocument) return
+        const countrySelect = iframeDocument.querySelector("#Txt_Country_ID")
+        if (countrySelect) {
+            countrySelect.value = value
+            iframeDocument.querySelector("#select2-Txt_Country_ID-container").textContent = text
+        }
+        try {
+            iframeDocument.querySelector("#btn_Get")?.click()
+        } catch (error) {
+            console.log(error)
+        }
+     }
+     const addCustomButton = () =>{
+        const iframeDocument = document.querySelector("iframe[src='business/gets.aspx']")?.contentDocument
+        if(!iframeDocument) return
+        const buttons = $(iframeDocument.querySelector("body > div.container-fluid > div > div > div:nth-child(2) > div > div")).children()
+        if (buttons.length !== 4) return
+        const newButtons = [
+            {text:"智利",value:"chl",code: 56},
+            {text:"哥伦比亚",value:"col",code: 57},
+            {text:"马来西亚",value:"mys",code: 60},
+            {text:"印尼",value:"idn",code: 62},
+            {text:"菲律宾",value:"phl",code: 63},
+            {text:"越南",value:"vnm",code: 84},
+        ]
+        newButtons.forEach(button=>{
+            const div = document.createElement("div")
+            div.classList = "col-12 mb-1"
+            div.style.marginRight = "12px"
+            const buttonElement = document.createElement("button")
+            buttonElement.classList = "btn btn-info"
+            buttonElement.textContent = button.text
+            buttonElement.value = button.value
+            buttonElement.addEventListener("click",()=>{
+                quickSetCountry(button.value,`${button.text}+${button.code}`)
+            })
+            div.appendChild(buttonElement)
+            buttons.eq(0).after(div)
+        })
+     }
      setInterval(()=>{
          autoAddReginCode()
          addStyle()
          autoCloseDialog()
          setPageSize()
+         addCustomButton()
      },200)
      setTimeout(()=>{
          autoOpen()
